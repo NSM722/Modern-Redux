@@ -1,4 +1,10 @@
-# Redux ToolKit and React
+# Modern Redux ToolKit and React App
+
+This template shows how redux-toolkit simplifies the previous `Redux boilerplate` code
+
+[Dogs as a service API](https://thedogapi.com/ "read docs")
+
+There's currently a bug in reading the API data
 
 ## Starter Vite Template
 

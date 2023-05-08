@@ -4,11 +4,16 @@
 // automatically turns on development checks
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
+import { dogsApiSlice } from '../features/dogs/dogsApiSlice';
 
 // the store
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
+    [dogsApiSlice.reducerPath]: dogsApiSlice.reducer,
+  },
+  middleware: (getDefaultMiddleWare) => {
+    return getDefaultMiddleWare().concat(dogsApiSlice.middleware)
   }
 })
 
