@@ -1,10 +1,22 @@
-import { useState } from 'react'
+import { useAppDispatch, useAppSelector } from './app/hooks'
+import { incremented, amountAdded } from './features/counter/counterSlice'
+import { useFetchBreedsQuery } from './features/dogs/dogsApiSlice'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // grab/extract the current value of the counter and display it on the UI
+  const count = useAppSelector(state => state.counter.value)
+  const dispatch = useAppDispatch()
+
+  const { data=[], isFetching } = useFetchBreedsQuery()
+
+  // onClick handler
+  function handleClick() {
+    dispatch(incremented())
+    // dispatch(amountAdded(7))
+  }
 
   return (
     <>
@@ -18,11 +30,34 @@ function App() {
       </div>
       <h1>React-Redux + Vite + TS</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={handleClick}>
           count is {count}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          
+          <div>
+            <p>Number of dogs fetched: {data.length}</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Picture</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  data.map((breed) => (
+                    <tr key={breed.id}>
+                      <td>{breed.name}</td>
+                      <td>
+                        <img src={breed.image.url} alt={breed.name} height={250}/>
+                      </td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
+          </div>
         </p>
       </div>
       <p className="read-the-docs">
