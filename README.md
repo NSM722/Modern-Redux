@@ -21,3 +21,9 @@ Done. Now run:
 ```js
 $ npm i @reduxjs/toolkit@next react-redux axios
 ``` 
+
+`configureStore` function is a wrapper around the basic createStore() function provided by Redux 
+It automatically sets up a Redux store with the right tools:
+ - including Redux DevTools integration
+ - the thunk middleware for handling asynchronous actions
+ - development checks like immutability and TypeScript support

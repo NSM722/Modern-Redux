@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useAppDispatch, useAppSelector } from './app/hooks'
 import { incremented } from './features/counter/counterSlice'
 
@@ -9,6 +8,13 @@ import './App.css'
 function App() {
   // grab/extract the current value of the counter and display it on the UI
   const count = useAppSelector(state => state.counter.value)
+
+  const dispatch = useAppDispatch()
+
+  // onClick handler
+  function handleClick() {
+    dispatch(incremented())
+  }
 
   return (
     <>
@@ -22,7 +28,7 @@ function App() {
       </div>
       <h1>React-Redux + Vite + TS</h1>
       <div className="card">
-        <button>
+        <button onClick={handleClick}>
           count is {count}
         </button>
         <p>
